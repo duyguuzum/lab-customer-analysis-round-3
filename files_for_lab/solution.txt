@@ -1,0 +1,47 @@
+Lab | Customer Analysis Round 3
+
+Show DataFrame info.
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+# The line down below is needed to prevent matplotlib to open the graph in a seaparate popup window. 
+%matplotlib inline
+
+file = pd.read_csv('marketing_customer_analysis.csv')
+file
+
+Describe DataFrame.
+
+file.describe()
+file.shape
+
+Show a plot of the total number of responses.
+
+fig, ax = plt.subplots()
+ax.bar(x = file['Response'].value_counts().index, height = file['Response'].value_counts().values)
+plt.show()
+
+Show a plot of the response rate by the sales channel.
+
+fix, ax = plt.subplots(1,2, figsize=(10,5))
+ax[0].scatter(x=file['Response'],y=file['Sales Channel'])
+ax[0].set_xlabel("Response")
+ax[0].set_ylabel('Sales Channel')
+sns.scatterplot(file, x='Response', y='Sales Channel', ax=ax[1])
+
+plt.tight_layout()
+plt.show()
+
+Show a plot of the response rate by the total claim amount.
+
+fig, ax = plt.subplots()
+sns.barplot(file, x="Response", y="Total Claim Amount", ax=ax)
+plt.show()
+
+Show a plot of the response rate by income.
+
+fig, ax = plt.subplots()
+sns.barplot(file, x="Response", y="Income", ax=ax)
+plt.show()
